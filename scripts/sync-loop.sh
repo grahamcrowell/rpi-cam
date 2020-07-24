@@ -21,5 +21,5 @@ do
     printf "syncing\n"
     aws --profile ${AWD_PROFILE} s3 sync ${SYNC_FOLDER} ${S3_TARGET_PATH}
 
-    sleep 5
+    sleep 1;
 done
