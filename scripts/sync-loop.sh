@@ -1,5 +1,5 @@
 #!/bin/bash
-SYNC_FOLDER=/home/graham/Documents/vena/rpi-cam/mock-sync-folder
+SYNC_FOLDER=/home/pi/Pictures/nico
 S3_TARGET_PATH=s3://grahamcrowell.com/nico
 AWD_PROFILE=personal
 SYNC_FILE=latest.jpg
