@@ -17,6 +17,7 @@ do
     raspistill -o ${SYNC_FOLDER}/${SYNC_FILE}
 
     python3 scripts/build_html.py
+    python3 scripts/rotate_pic.py
 
     echo "local folder"
     ls -lha ${SYNC_FOLDER}
