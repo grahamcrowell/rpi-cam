@@ -15,6 +15,8 @@ do
 
     raspistill -o ${SYNC_FOLDER}/${SYNC_FILE}
 
+    ./scripts/build_html.py
+
     echo "local folder"
     ls -lha ${SYNC_FOLDER}
 
