@@ -1,6 +1,6 @@
 #!/bin/bash
 SYNC_FOLDER=/home/pi/Pictures/nico
-SYNC_FOLDER=mock-sync-folder
+# SYNC_FOLDER=mock-sync-folder
 S3_TARGET_PATH=s3://grahamcrowell.com/nico
 AWD_PROFILE=personal
 SYNC_FILE=latest.jpg
