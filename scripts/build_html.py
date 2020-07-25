@@ -1,7 +1,7 @@
-
-#!/usr/bin/env python3
+from datetime import datetime, tzinfo
+import pytz
 from mako.template import Template
-from datetime import datetime
+
 
 template = """
 <title>Nico Cam</title>
@@ -9,9 +9,13 @@ template = """
 <img src="http://grahamcrowell.com/nico/latest.jpg" width="1000">
 """
 
+ts = datetime.now(tz=pytz.timezone('US/Eastern')).isoformat()
+
 dst = "/home/pi/Pictures/nico/index.html"
-# dst = "mock-sync-folder"
+# dst = "mock-sync-folder/index.html"
 
 with open(dst, 'w') as out:
     mytemplate = Template(template)
-    out.write(mytemplate.render(datetime=datetime.now(tz=tzinfo()).isoformat()))
+    html = mytemplate.render(datetime=ts)
+    print(html)
+    out.write(html)

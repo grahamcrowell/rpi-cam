@@ -1,5 +1,6 @@
 #!/bin/bash
 SYNC_FOLDER=/home/pi/Pictures/nico
+SYNC_FOLDER=mock-sync-folder
 S3_TARGET_PATH=s3://grahamcrowell.com/nico
 AWD_PROFILE=personal
 SYNC_FILE=latest.jpg
@@ -15,7 +16,7 @@ do
 
     raspistill -o ${SYNC_FOLDER}/${SYNC_FILE}
 
-    ./scripts/build_html.py
+    python3 scripts/build_html.py
 
     echo "local folder"
     ls -lha ${SYNC_FOLDER}
