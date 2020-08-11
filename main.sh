@@ -7,10 +7,9 @@ CAPTURE_NUM=CAPTURE_ITERS;
 
 function capture-loop() {
     while true; do
+        echo "CAPTURE_NUM=${CAPTURE_NUM}"
         ./main-capture.sh
-        # capture_pid=$!
-        # wait $capture_pid
-        if (( $CAPTURE_NUM <= 0 )); then
+        if (( $CAPTURE_NUM < 0 )); then
             break
         else
             CAPTURE_NUM=$(( $CAPTURE_NUM - 1 ))
@@ -24,9 +23,8 @@ SYNC_NUM=SYNC_ITERS;
 
 function sync-loop() {
     while true; do
+        echo "CAPTURE_NUM=${CAPTURE_NUM}"
         ./main-sync.sh
-        # sync_pid=$!
-        # wait $sync_pid
         if (( $SYNC_NUM < 0 )); then
             break
         else
