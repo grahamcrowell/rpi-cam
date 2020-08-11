@@ -26,8 +26,9 @@ function main-loop() {
             echo "active sync in progress"
         fi
         
+
         
-        if [ $REMAINING_ITERS -lt 0 ]; then
+        if (( $REMAINING_ITERS <= 0 )); then
             break
         else
             REMAINING_ITERS=$(( $REMAINING_ITERS - 1 ))
