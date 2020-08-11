@@ -2,6 +2,11 @@
 echo "$0"
 source .env
 
+function clean () {
+    rm ${LOCAL_RAW_VIDEO_PATH}/*
+}
+
+
 MAX_ITERS=10;
 REMAINING_ITERS=MAX_ITERS;
 
@@ -30,10 +35,11 @@ function main-loop() {
     done
 }
 
+clean
+main-loop
+# main-loop &
+# main_pid=$!
 
-main-loop &
-main_pid=$!
+# echo "main_pid = $main_pid"
 
-echo "main_pid = $main_pid"
-
-wait $main_pid
+# wait $main_pid
