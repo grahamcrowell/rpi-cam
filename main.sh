@@ -2,46 +2,38 @@
 echo "$0"
 source .env
 
-CAPTURE_ITERS=10;
-CAPTURE_NUM=CAPTURE_ITERS;
+MAX_ITERS=10;
+REMAINING_ITERS=MAX_ITERS;
 
-function capture-loop() {
+function main-loop() {
+    sync_pid=0
     while true; do
-        echo "CAPTURE_NUM=${CAPTURE_NUM}"
+        echo "REMAINING_ITERS=${REMAINING_ITERS}"
         ./main-capture.sh
-        if (( $CAPTURE_NUM < 0 )); then
+        ps -p $sync_pid -o args=
+        if (( $? != 0 )); then
+            echo "no active sync running."
+            echo "starting sync now"
+            ./main-sync.sh &
+            echo "sync pid = $sync_pid"
+            sync_pid=$!
+        else
+            echo "active sync in progress"
+        fi
+        
+        
+        if (( $REMAINING_ITERS < 0 )); then
             break
         else
-            CAPTURE_NUM=$(( $CAPTURE_NUM - 1 ))
+            REMAINING_ITERS=$(( $REMAINING_ITERS - 1 ))
         fi
     done
 }
 
 
-SYNC_ITERS=10;
-SYNC_NUM=SYNC_ITERS;
+main-loop &
+main_pid=$!
 
-function sync-loop() {
-    while true; do
-        echo "CAPTURE_NUM=${CAPTURE_NUM}"
-        ./main-sync.sh
-        if (( $SYNC_NUM < 0 )); then
-            break
-        else
-            SYNC_NUM=$(( $SYNC_NUM - 1 ))
-        fi
-    done
-}
+echo "main_pid = $main_pid"
 
-
-capture-loop &
-capture_pid=$!
-
-sync-loop &
-sync_pid=$!
-
-echo $capture_pid
-echo $sync_pid
-
-wait $capture_pid
-wait $sync_pid
+wait $main_pid
