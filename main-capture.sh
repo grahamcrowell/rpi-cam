@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 echo "$0"
 source .env
+
 DURATION_MS=$(( $DURATION_SECONDS * 1000 ))
-TIMESTAMP=$(date --utc --iso-8601=seconds)
+TIMESTAMP=$(date --utc --iso-8601=ns)
+
+if [ ! -d "$LOCAL_RAW_VIDEO_PATH" ]; then
+    printf "${RED}directory not found: ${LOCAL_RAW_VIDEO_PATH}${RESET}\n"
+    exit 1;
+fi
+
 
 # if [ -n $LOCAL_RAW_VIDEO_PATH && ! -d "${LOCAL_RAW_VIDEO_PATH}" ]; then
 #     echo "create ${LOCAL_RAW_VIDEO_PATH}"
