@@ -4,10 +4,10 @@ source .env
 DURATION_MS=$(( $DURATION_SECONDS * 1000 ))
 TIMESTAMP=$(date --utc --iso-8601=seconds)
 
-if [ ! -d "${LOCAL_RAW_VIDEO_PATH}" ]; then
-    echo "create ${LOCAL_RAW_VIDEO_PATH}"
-    mkdir ${LOCAL_RAW_VIDEO_PATH}
-fi
+# if [ -n $LOCAL_RAW_VIDEO_PATH && ! -d "${LOCAL_RAW_VIDEO_PATH}" ]; then
+#     echo "create ${LOCAL_RAW_VIDEO_PATH}"
+#     mkdir ${LOCAL_RAW_VIDEO_PATH}
+# fi
 
 echo "capturing..."
 # https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspivid.md
