@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "starting main"
 
-DURATION=5
+DURATION_MS=$((5*1000))
 TIMESTAMP=$(date --utc --iso-8601=seconds)
 RAW_VIDEO_PATH=~/raw-video
 
