@@ -15,7 +15,6 @@ function capture-loop() {
         else
             CAPTURE_NUM=$(( $CAPTURE_NUM - 1 ))
         fi
-        
     done
 }
 
@@ -36,10 +35,15 @@ function sync-loop() {
     done
 }
 
+
 capture-loop &
 capture_pid=$!
+
 sync-loop &
 sync_pid=$!
 
 echo $capture_pid
 echo $sync_pid
+
+wait $capture_pid
+wait $sync_pid
