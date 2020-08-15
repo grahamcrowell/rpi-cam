@@ -16,7 +16,7 @@ fi
 #     mkdir ${LOCAL_RAW_VIDEO_PATH}
 # fi
 
-echo "capturing..."
+echo "capturing... ${DURATION_MS} files"
 # https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspivid.md
-raspivid --output "${LOCAL_RAW_VIDEO_PATH}/%FT%T.h264" --width 1920 --height 1080 --framerate 25 --spstimings --segment $DURATION_MS
+raspivid --output "${LOCAL_RAW_VIDEO_PATH}/${TIMESTAMP}%05d.h264" --width 1920 --height 1080 --framerate 25 --spstimings --segment $DURATION_MS
 echo "capture complete."
