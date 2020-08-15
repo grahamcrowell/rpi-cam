@@ -3,9 +3,8 @@ echo "$0"
 source .env
 
 function clean () {
-    rm ${LOCAL_RAW_VIDEO_PATH}/*
+    rm ${LOCAL_RAW_VIDEO_PATH}
 }
-
 
 MAX_ITERS=10;
 REMAINING_ITERS=MAX_ITERS;
@@ -17,17 +16,14 @@ function main-loop() {
         ./main-capture.sh
         ps -p $sync_pid -o args=
         if (( $? != 0 )); then
-            echo "no active sync running."
-            echo "starting sync now"
+            echo "previous sync process no longer running."
+            echo "starting new sync process"
             ./main-sync.sh &
-            echo "sync pid = $sync_pid"
             sync_pid=$!
+            echo "new sync pid = $sync_pid"
         else
-            echo "active sync in progress"
+            echo "sync process $sync_pid stilling running"
         fi
-        
-
-        
         if (( $REMAINING_ITERS <= 0 )); then
             break
         else
@@ -36,6 +32,7 @@ function main-loop() {
     done
 }
 
+./main-sync.sh
 clean
 main-loop
 # main-loop &
