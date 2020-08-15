@@ -32,7 +32,7 @@ function main-loop() {
     done
 }
 
-./main-sync.sh
+./main-sync.sheEe
 clean
 main-loop
 # main-loop &

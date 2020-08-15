@@ -18,5 +18,5 @@ fi
 
 echo "capturing..."
 # https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspivid.md
-raspivid --output "${LOCAL_RAW_VIDEO_PATH}/${TIMESTAMP}.h264" --timeout ${DURATION}
+raspivid --output "${LOCAL_RAW_VIDEO_PATH}/%FT%T.h264" --width 1920 --height 1080 --framerate 25 --spstimings --segment $DURATION_MS
 echo "capture complete."
